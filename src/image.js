@@ -48,6 +48,17 @@ export default async function (req, res) {
     ctx.restore()
   }
 
+  function createTerminus (x, y) {
+    ctx.strokeStyle = COLOR
+    ctx.beginPath()
+    ctx.moveTo(x, y - 48)
+    ctx.lineTo(x, y + 48)
+    ctx.lineWidth = 24
+    ctx.stroke()
+    ctx.closePath()
+    ctx.restore()
+  }
+
   function writeStationName (text, x, y, smaller = false) {
     ctx.font = '48px Nunito'
     if (smaller) ctx.font = '32px Nunito'
@@ -85,6 +96,9 @@ export default async function (req, res) {
     createStationNode(LEFT_NODE_COORDINATE.x, LEFT_NODE_COORDINATE.y)
     createLine(LEFT_NODE_COORDINATE.x - 48, LEFT_NODE_COORDINATE.y, 0, LEFT_NODE_COORDINATE.y)
     writeStationName(query.get('before'), LEFT_NODE_COORDINATE.x, LEFT_NODE_COORDINATE.y + 144, true)
+  } else {
+    createLine(LEFT_NODE_COORDINATE.x + 256 + 48, LEFT_NODE_COORDINATE.y, CENTER_NODE_COORDINATE.x - 48, CENTER_NODE_COORDINATE.y)
+    createTerminus(LEFT_NODE_COORDINATE.x + 256 + 48, LEFT_NODE_COORDINATE.y)
   }
 
   if (query.get('after')) {
@@ -92,6 +106,9 @@ export default async function (req, res) {
     createStationNode(RIGHT_NODE_COORDINATE.x, RIGHT_NODE_COORDINATE.y)
     createLine(RIGHT_NODE_COORDINATE.x + 48, RIGHT_NODE_COORDINATE.y, WIDTH, RIGHT_NODE_COORDINATE.y)
     writeStationName(query.get('after'), RIGHT_NODE_COORDINATE.x, RIGHT_NODE_COORDINATE.y + 144, true)
+  } else {
+    createLine(RIGHT_NODE_COORDINATE.x - 256 - 48, RIGHT_NODE_COORDINATE.y, CENTER_NODE_COORDINATE.x + 48, CENTER_NODE_COORDINATE.y)
+    createTerminus(RIGHT_NODE_COORDINATE.x - 256 - 48, RIGHT_NODE_COORDINATE.y)
   }
 
   ctx.drawImage(LOGO, 24, HEIGHT - 24 - LOGO.height)
