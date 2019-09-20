@@ -33,4 +33,4 @@ const stations = [
   'Nambo'
 ]
 
-export default stations
+export default [stations, 'FDB813', 'Lingkar']

@@ -21,4 +21,4 @@ const stations = [
   'Cikarang'
 ]
 
-export default stations
+export default [stations, '01BAF2', 'Bekasi']

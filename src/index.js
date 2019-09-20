@@ -2,10 +2,10 @@ import axios from 'axios'
 import stations from './stations'
 
 function emitText () {
-  const line = stations[Math.floor(Math.random() * stations.length)]
+  const [line, color, name] = stations[Math.floor(Math.random() * stations.length)]
   const stationIndex = Math.floor(Math.random() * line.length)
   const station = line[stationIndex]
-  let imageUrl = `https://commuterbot.now.sh/assets/images/commuterbot-generated.png?station=${station}`
+  let imageUrl = `https://commuterbot.now.sh/assets/images/commuterbot-generated.png?line=${name}&color=${color}&station=${station}`
   if (stationIndex > 0) imageUrl += `&before=${line[stationIndex - 1]}`
   if (stationIndex < line.length - 1) imageUrl += `&after=${line[stationIndex + 1]}`
 
