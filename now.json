@@ -3,7 +3,7 @@
     { "src": "api/index.js", "use": "@now/node" },
     {
       "src": "api/image.js",
-      "use": "@now/node-server",
+      "use": "@now/node",
       "config": {
         "maxLambdaSize": "40mb"
       } 
