@@ -11,6 +11,12 @@
     { "src": "assets/fonts/Nunito-Regular.ttf", "use": "@now/static"},
     { "src": "assets/images/logo.png", "use": "@now/static"}
   ],
+  "routes": [
+    {
+      "src": "assets/images/commuterbot-generated.png?(.*)",
+      "dest": "https://commuterbot-image-server.herokuapp.com/$1"
+    }
+  ],
   "env": {
     "IFTTT_TOKEN": "@commuterbot-maker-token"
   }
