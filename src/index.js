@@ -20,7 +20,7 @@ export default async function (req, res) {
   const text = emitText()
 
   try {
-    if (!req.query.ignorePostRequest) {
+    if (req.query.ignorePostRequest === undefined) {
       await axios.post(process.env.IFTTT_TOKEN, {
         value1: text
       }, {
