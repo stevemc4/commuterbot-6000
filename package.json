@@ -6,7 +6,8 @@
   "scripts": {
     "test": "eslint src",
     "dev": "babel-node src/index.js",
-    "build": "babel src -d api && cp assets api -r"
+    "build": "babel src -d api && cp assets api -r",
+    "start": "micro -l tcp://0.0.0.0:${PORT-3000} api/image.js"
   },
   "author": "Dhika Rizky",
   "license": "MIT",
@@ -34,7 +35,8 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
-    "canvas": "^2.6.0"
+    "canvas": "^2.6.0",
+    "micro": "^9.3.4"
   },
   "husky": {
     "pre-commit": "lint-staged",
