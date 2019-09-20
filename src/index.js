@@ -8,7 +8,9 @@ function emitText () {
   const announcementLines = [
     `Sesaat lagi Anda akan tiba di Stasiun ${station}. Pastikan tiket dan barang bawaan Anda tidak tertinggal dan perhatikan celah peron.`,
     `Stasiun berikutnya, Stasiun ${station}.`,
-    `Stasiun ${station}. Hati-hati melangkah.`
+    `Stasiun ${station}. Hati-hati melangkah.`,
+    `次は、${station}、${station}。お出口は${Math.random() >= 0.5 ? "左" : "右"}側です。`,
+    `Next station, ${station} Station.`
   ]
 
   return announcementLines[Math.floor(Math.random() * announcementLines.length)]
