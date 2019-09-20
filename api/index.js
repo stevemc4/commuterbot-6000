@@ -20,7 +20,7 @@ function emitText() {
   if (stationIndex > 0) imageUrl += `&before=${line[stationIndex - 1]}`;
   if (stationIndex < line.length - 1) imageUrl += `&after=${line[stationIndex + 1]}`;
   const announcementLines = [`Sesaat lagi Anda akan tiba di Stasiun ${station}. Pastikan tiket dan barang bawaan Anda tidak tertinggal dan perhatikan celah peron.`, `Stasiun berikutnya, Stasiun ${station}.`, `Stasiun ${station}. Hati-hati melangkah.`, `次は、${station}、${station}。お出口は${Math.random() >= 0.5 ? '左' : '右'}側です。`, `Next station, ${station} Station.`];
-  return [announcementLines[Math.floor(Math.random() * announcementLines.length)], imageUrl];
+  return [announcementLines[Math.floor(Math.random() * announcementLines.length)], imageUrl.replace(/ /g, '%20')];
 }
 
 async function _default(req, res) {

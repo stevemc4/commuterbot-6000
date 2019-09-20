@@ -19,7 +19,7 @@ function emitText () {
 
   return [
     announcementLines[Math.floor(Math.random() * announcementLines.length)],
-    imageUrl
+    imageUrl.replace(/ /g, '%20')
   ]
 }
 
