@@ -14,7 +14,10 @@
   "routes": [
     {
       "src": "/assets/images/commuterbot-generated.png?(.*)",
-      "dest": "https://commuterbot-image-server.herokuapp.com/$1"
+      "dest": "https://commuterbot-image-server.herokuapp.com/$1",
+      "headers": {
+        "content-type": "image/png"
+      }
     }
   ],
   "env": {
