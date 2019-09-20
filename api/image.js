@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -7,11 +9,18 @@ exports.default = _default;
 
 var _canvas = require("canvas");
 
+var _url = _interopRequireDefault(require("url"));
+
 async function _default(req, res) {
   const WIDTH = 1200;
   const HEIGHT = 630;
   const FONT_PATH = `${__dirname}/assets/fonts/Nunito-Regular.ttf`;
   const LOGO = await (0, _canvas.loadImage)(`${__dirname}/assets/images/logo.png`);
+
+  const {
+    query
+  } = _url.default.parse(req.url, true);
+
   (0, _canvas.registerFont)(FONT_PATH, {
     family: 'Nunito'
   });
@@ -60,9 +69,9 @@ async function _default(req, res) {
   createStationNode(RIGHT_NODE_COORDINATE.x, RIGHT_NODE_COORDINATE.y);
   createLine(LEFT_NODE_COORDINATE.x + 48, LEFT_NODE_COORDINATE.y, CENTER_NODE_COORDINATE.x - 48, CENTER_NODE_COORDINATE.y);
   createLine(RIGHT_NODE_COORDINATE.x - 48, RIGHT_NODE_COORDINATE.y, CENTER_NODE_COORDINATE.x + 48, CENTER_NODE_COORDINATE.y);
-  writeStationName(req.query.station, CENTER_NODE_COORDINATE.x, CENTER_NODE_COORDINATE.y + 144);
-  writeStationName(req.query.before, LEFT_NODE_COORDINATE.x, LEFT_NODE_COORDINATE.y + 144);
-  writeStationName(req.query.after, RIGHT_NODE_COORDINATE.x, RIGHT_NODE_COORDINATE.y + 144);
+  writeStationName(query.station, CENTER_NODE_COORDINATE.x, CENTER_NODE_COORDINATE.y + 144);
+  writeStationName(query.before, LEFT_NODE_COORDINATE.x, LEFT_NODE_COORDINATE.y + 144);
+  writeStationName(query.after, RIGHT_NODE_COORDINATE.x, RIGHT_NODE_COORDINATE.y + 144);
   ctx.drawImage(LOGO, 24, HEIGHT - 24 - LOGO.height);
   const stream = canvas.createPNGStream();
   stream.pipe(res);

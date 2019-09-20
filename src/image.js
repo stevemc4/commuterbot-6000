@@ -1,10 +1,13 @@
 import { createCanvas, registerFont, loadImage } from 'canvas'
+import url from 'url'
 
 export default async function (req, res) {
   const WIDTH = 1200
   const HEIGHT = 630
   const FONT_PATH = `${__dirname}/assets/fonts/Nunito-Regular.ttf`
   const LOGO = await loadImage(`${__dirname}/assets/images/logo.png`)
+
+  const { query } = url.parse(req.url, true)
 
   registerFont(FONT_PATH, {
     family: 'Nunito'
@@ -59,9 +62,9 @@ export default async function (req, res) {
   createLine(LEFT_NODE_COORDINATE.x + 48, LEFT_NODE_COORDINATE.y, CENTER_NODE_COORDINATE.x - 48, CENTER_NODE_COORDINATE.y)
   createLine(RIGHT_NODE_COORDINATE.x - 48, RIGHT_NODE_COORDINATE.y, CENTER_NODE_COORDINATE.x + 48, CENTER_NODE_COORDINATE.y)
 
-  writeStationName(req.query.station, CENTER_NODE_COORDINATE.x, CENTER_NODE_COORDINATE.y + 144)
-  writeStationName(req.query.before, LEFT_NODE_COORDINATE.x, LEFT_NODE_COORDINATE.y + 144)
-  writeStationName(req.query.after, RIGHT_NODE_COORDINATE.x, RIGHT_NODE_COORDINATE.y + 144)
+  writeStationName(query.station, CENTER_NODE_COORDINATE.x, CENTER_NODE_COORDINATE.y + 144)
+  writeStationName(query.before, LEFT_NODE_COORDINATE.x, LEFT_NODE_COORDINATE.y + 144)
+  writeStationName(query.after, RIGHT_NODE_COORDINATE.x, RIGHT_NODE_COORDINATE.y + 144)
 
   ctx.drawImage(LOGO, 24, HEIGHT - 24 - LOGO.height)
 
