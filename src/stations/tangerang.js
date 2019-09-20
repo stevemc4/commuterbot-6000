@@ -12,4 +12,4 @@ const stations = [
   'Tangerang'
 ]
 
-export default stations
+export default [stations, 'B66111', 'Tangerang']

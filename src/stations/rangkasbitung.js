@@ -20,4 +20,4 @@ const stations = [
   'Rangkasbitung'
 ]
 
-export default stations
+export default [stations, 'A6CE39', 'Rangkasbitung']

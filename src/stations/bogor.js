@@ -1,17 +1,11 @@
 const stations = [
-  'Jatinegara',
-  'Pondok Jati',
-  'Kramat',
-  'Gang Sentiong',
-  'Pasar Senen',
-  'Kemayoran',
-  'Rajawali',
-  'Kampung Bandan',
-  'Angke',
-  'Duri',
-  'Tanah Abang',
-  'Karet',
-  'Sudirman',
+  'Jakartakota',
+  'Jayakarta',
+  'Mangga Besar',
+  'Sawah Besar',
+  'Juanda',
+  'Gondangdia',
+  'Cikini',
   'Manggarai',
   'Tebet',
   'Cawang',
@@ -28,9 +22,7 @@ const stations = [
   'Citayam',
   'Bojonggede',
   'Cilebut',
-  'Bogor',
-  'Cibinong',
-  'Nambo'
+  'Bogor'
 ]
 
-export default [stations, 'FDB813', 'Lingkar']
+export default [stations, 'ED1B24', 'Bogor']
