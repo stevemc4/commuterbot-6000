@@ -28,12 +28,21 @@ async function _default(req, res) {
   const ctx = canvas.getContext('2d');
   ctx.save();
 
-  function createStationNode(x, y) {
+  function createStationNode(x, y, isCurrentStation = false) {
     ctx.strokeStyle = '#1565C0';
     ctx.beginPath();
     ctx.ellipse(x, y, 48, 48, 0, 0, 360);
     ctx.lineWidth = 24;
     ctx.stroke();
+
+    if (isCurrentStation) {
+      ctx.closePath();
+      ctx.beginPath();
+      ctx.ellipse(x, y, 24, 24, 0, 0, 360);
+      ctx.fillStyle = '#1565C0';
+      ctx.fill();
+    }
+
     ctx.closePath();
     ctx.restore();
   }
@@ -49,8 +58,9 @@ async function _default(req, res) {
     ctx.restore();
   }
 
-  function writeStationName(text, x, y) {
+  function writeStationName(text, x, y, smaller = false) {
     ctx.font = '32px Nunito';
+    if (smaller) ctx.font = '24px Nunito';
     const textMeasurement = ctx.measureText(text);
     const XPOS = x - textMeasurement.width / 2;
     ctx.fillStyle = '#1565C0';
@@ -64,14 +74,15 @@ async function _default(req, res) {
   const CENTER_NODE_COORDINATE = createPoint(WIDTH / 2, HEIGHT / 2);
   const LEFT_NODE_COORDINATE = createPoint(WIDTH / 2 - 256 - 96, HEIGHT / 2);
   const RIGHT_NODE_COORDINATE = createPoint(WIDTH / 2 + 256 + 96, HEIGHT / 2);
-  createStationNode(CENTER_NODE_COORDINATE.x, CENTER_NODE_COORDINATE.y);
+  createStationNode(CENTER_NODE_COORDINATE.x, CENTER_NODE_COORDINATE.y, true);
   createStationNode(LEFT_NODE_COORDINATE.x, LEFT_NODE_COORDINATE.y);
   createStationNode(RIGHT_NODE_COORDINATE.x, RIGHT_NODE_COORDINATE.y);
   createLine(LEFT_NODE_COORDINATE.x + 48, LEFT_NODE_COORDINATE.y, CENTER_NODE_COORDINATE.x - 48, CENTER_NODE_COORDINATE.y);
   createLine(RIGHT_NODE_COORDINATE.x - 48, RIGHT_NODE_COORDINATE.y, CENTER_NODE_COORDINATE.x + 48, CENTER_NODE_COORDINATE.y);
   writeStationName(query.station, CENTER_NODE_COORDINATE.x, CENTER_NODE_COORDINATE.y + 144);
-  writeStationName(query.before, LEFT_NODE_COORDINATE.x, LEFT_NODE_COORDINATE.y + 144);
-  writeStationName(query.after, RIGHT_NODE_COORDINATE.x, RIGHT_NODE_COORDINATE.y + 144);
+  writeStationName(query.before, LEFT_NODE_COORDINATE.x, LEFT_NODE_COORDINATE.y + 144, true);
+  writeStationName(query.after, RIGHT_NODE_COORDINATE.x, RIGHT_NODE_COORDINATE.y + 144, true);
+  writeStationName('Stasiun Saat Ini', CENTER_NODE_COORDINATE.x, CENTER_NODE_COORDINATE.y + 184, true);
   ctx.drawImage(LOGO, 24, HEIGHT - 24 - LOGO.height);
   const stream = canvas.createPNGStream();
   stream.pipe(res);
