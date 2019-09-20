@@ -5,7 +5,7 @@ export default async function (req, res) {
   const HEIGHT = 630
   const FONT_PATH = `${__dirname}/assets/fonts/Nunito-Regular.ttf`
   const LOGO = await loadImage(`${__dirname}/assets/images/logo.png`)
-  
+
   registerFont(FONT_PATH, {
     family: 'Nunito'
   })
