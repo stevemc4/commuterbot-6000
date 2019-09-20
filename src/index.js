@@ -4,9 +4,16 @@ import stations from './stations'
 function emitText () {
   const line = stations[Math.floor(Math.random() * stations.length)]
   const station = line[Math.floor(Math.random() * line.length)]
+  
+  const announcementLines = [
+    `Sesaat lagi Anda akan tiba di Stasiun ${station}. Pastikan tiket dan barang bawaan Anda tidak tertinggal dan perhatikan celah peron.`,
+    `Stasiun berikutnya, Stasiun ${station}.`,
+    `Stasiun ${station}. Hati-hati melangkah.`,
+    `次は、${station}、${station}。お出口は${Math.random() >= 0.5 ? "左" : "右"}側です。`,
+    `Next station, ${station} Station.`
+  ]
 
-  return `Sesaat lagi Anda akan tiba di Stasiun ${station}.
-Pastikan tiket dan barang bawaan Anda tidak tertinggal dan perhatikan celah peron.`
+  return announcementLines[Math.floor(Math.random() * announcementLines.length)]
 }
 
 export default async function (_req, res) {
