@@ -7,7 +7,8 @@ export default async function (req, res) {
   const FONT_PATH = `${__dirname}/assets/fonts/Nunito-Regular.ttf`
   const LOGO = await loadImage(`${__dirname}/assets/images/logo.png`)
 
-  const { query } = url.parse(req.url, true)
+  const uri = new url.URL(req.url)
+  const query = uri.searchParams
 
   registerFont(FONT_PATH, {
     family: 'Nunito'
@@ -65,21 +66,21 @@ export default async function (req, res) {
   const RIGHT_NODE_COORDINATE = createPoint(WIDTH / 2 + 384 + 96, HEIGHT / 2 - 72)
 
   createStationNode(CENTER_NODE_COORDINATE.x, CENTER_NODE_COORDINATE.y, true)
-  writeStationName(query.station, CENTER_NODE_COORDINATE.x, CENTER_NODE_COORDINATE.y + 144)
+  writeStationName(query.get('station'), CENTER_NODE_COORDINATE.x, CENTER_NODE_COORDINATE.y + 144)
   writeStationName('Stasiun Saat Ini', CENTER_NODE_COORDINATE.x, CENTER_NODE_COORDINATE.y + 184, true)
 
-  if (query.before) {
+  if (query.get('before')) {
     createLine(LEFT_NODE_COORDINATE.x + 48, LEFT_NODE_COORDINATE.y, CENTER_NODE_COORDINATE.x - 48, CENTER_NODE_COORDINATE.y)
     createStationNode(LEFT_NODE_COORDINATE.x, LEFT_NODE_COORDINATE.y)
-    createLine(LEFT_NODE_COORDINATE.x - 48, LEFT_NODE_COORDINATE.y, 0, LEFT_NODE_COORDINATE.y)  
-    writeStationName(query.before, LEFT_NODE_COORDINATE.x, LEFT_NODE_COORDINATE.y + 144, true)
+    createLine(LEFT_NODE_COORDINATE.x - 48, LEFT_NODE_COORDINATE.y, 0, LEFT_NODE_COORDINATE.y)
+    writeStationName(query.get('before'), LEFT_NODE_COORDINATE.x, LEFT_NODE_COORDINATE.y + 144, true)
   }
 
-  if (query.after) {
+  if (query.get('after')) {
     createLine(RIGHT_NODE_COORDINATE.x - 48, RIGHT_NODE_COORDINATE.y, CENTER_NODE_COORDINATE.x + 48, CENTER_NODE_COORDINATE.y)
     createStationNode(RIGHT_NODE_COORDINATE.x, RIGHT_NODE_COORDINATE.y)
     createLine(RIGHT_NODE_COORDINATE.x + 48, RIGHT_NODE_COORDINATE.y, WIDTH, RIGHT_NODE_COORDINATE.y)
-    writeStationName(query.after, RIGHT_NODE_COORDINATE.x, RIGHT_NODE_COORDINATE.y + 144, true)
+    writeStationName(query.get('after'), RIGHT_NODE_COORDINATE.x, RIGHT_NODE_COORDINATE.y + 144, true)
   }
 
   ctx.drawImage(LOGO, 24, HEIGHT - 24 - LOGO.height)
