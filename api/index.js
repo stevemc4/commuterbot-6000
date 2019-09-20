@@ -16,7 +16,7 @@ function emitText() {
 
   const stationIndex = Math.floor(Math.random() * line.length);
   const station = line[stationIndex];
-  const imageUrl = `https://commuterbot.now.sh/assets/images/commuterbot-generated.png?station=${station}`;
+  let imageUrl = `https://commuterbot.now.sh/assets/images/commuterbot-generated.png?station=${station}`;
   if (stationIndex > 0) imageUrl += `&before=${line[stationIndex - 1]}`;
   if (stationIndex < line.length - 1) imageUrl += `&after=${line[stationIndex + 1]}`;
   const announcementLines = [`Sesaat lagi Anda akan tiba di Stasiun ${station}. Pastikan tiket dan barang bawaan Anda tidak tertinggal dan perhatikan celah peron.`, `Stasiun berikutnya, Stasiun ${station}.`, `Stasiun ${station}. Hati-hati melangkah.`, `次は、${station}、${station}。お出口は${Math.random() >= 0.5 ? '左' : '右'}側です。`, `Next station, ${station} Station.`];
