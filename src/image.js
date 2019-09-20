@@ -20,13 +20,13 @@ export default async function (req, res) {
   function createStationNode (x, y, isCurrentStation = false) {
     ctx.strokeStyle = '#1565C0'
     ctx.beginPath()
-    ctx.ellipse(x, y, 48, 48, 0, 0, 360)
-    ctx.lineWidth = 24
+    ctx.ellipse(x, y, 64, 64, 0, 0, 360)
+    ctx.lineWidth = 32
     ctx.stroke()
     if (isCurrentStation) {
       ctx.closePath()
       ctx.beginPath()
-      ctx.ellipse(x, y, 24, 24, 0, 0, 360)
+      ctx.ellipse(x, y, 32, 32, 0, 0, 360)
       ctx.fillStyle = '#1565C0'
       ctx.fill()
     }
@@ -46,8 +46,8 @@ export default async function (req, res) {
   }
 
   function writeStationName (text, x, y, smaller = false) {
-    ctx.font = '32px Nunito'
-    if (smaller) ctx.font = '24px Nunito'
+    ctx.font = '48px Nunito'
+    if (smaller) ctx.font = '32px Nunito'
     const textMeasurement = ctx.measureText(text)
     const XPOS = x - textMeasurement.width / 2
     ctx.fillStyle = '#1565C0'
@@ -60,15 +60,19 @@ export default async function (req, res) {
 
   ctx.restore()
 
-  const CENTER_NODE_COORDINATE = createPoint(WIDTH / 2, HEIGHT / 2)
-  const LEFT_NODE_COORDINATE = createPoint(WIDTH / 2 - 256 - 96, HEIGHT / 2)
-  const RIGHT_NODE_COORDINATE = createPoint(WIDTH / 2 + 256 + 96, HEIGHT / 2)
+  const CENTER_NODE_COORDINATE = createPoint(WIDTH / 2, HEIGHT / 2 - 72)
+  const LEFT_NODE_COORDINATE = createPoint(WIDTH / 2 - 384 - 96, HEIGHT / 2 - 72)
+  const RIGHT_NODE_COORDINATE = createPoint(WIDTH / 2 + 384 + 96, HEIGHT / 2 - 72)
 
   createStationNode(CENTER_NODE_COORDINATE.x, CENTER_NODE_COORDINATE.y, true)
   createStationNode(LEFT_NODE_COORDINATE.x, LEFT_NODE_COORDINATE.y)
   createStationNode(RIGHT_NODE_COORDINATE.x, RIGHT_NODE_COORDINATE.y)
+
   createLine(LEFT_NODE_COORDINATE.x + 48, LEFT_NODE_COORDINATE.y, CENTER_NODE_COORDINATE.x - 48, CENTER_NODE_COORDINATE.y)
+  createLine(LEFT_NODE_COORDINATE.x - 48, LEFT_NODE_COORDINATE.y, 0, LEFT_NODE_COORDINATE.y)
+
   createLine(RIGHT_NODE_COORDINATE.x - 48, RIGHT_NODE_COORDINATE.y, CENTER_NODE_COORDINATE.x + 48, CENTER_NODE_COORDINATE.y)
+  createLine(RIGHT_NODE_COORDINATE.x + 48, RIGHT_NODE_COORDINATE.y, WIDTH, RIGHT_NODE_COORDINATE.y)
 
   writeStationName(query.station, CENTER_NODE_COORDINATE.x, CENTER_NODE_COORDINATE.y + 144)
   writeStationName(query.before, LEFT_NODE_COORDINATE.x, LEFT_NODE_COORDINATE.y + 144, true)
