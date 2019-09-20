@@ -13,7 +13,7 @@
   ],
   "routes": [
     {
-      "src": "assets/images/commuterbot-generated.png?(.*)",
+      "src": "/assets/images/commuterbot-generated.png?(.*)",
       "dest": "https://commuterbot-image-server.herokuapp.com/$1"
     }
   ],
