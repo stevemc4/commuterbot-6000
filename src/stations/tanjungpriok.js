@@ -5,4 +5,4 @@ const stations = [
   'Tanjung Priok'
 ]
 
-export default [stations, '01BAF2', 'Tanjung Priok']
+export default [stations, 'EF59A1', 'Tanjung Priok']
